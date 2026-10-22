@@ -1,11 +1,11 @@
 module github.com/zerodha/fastcache/tests
 
-go 1.18
+go 1.26.0
 
 require (
 	github.com/alicebob/miniredis v2.5.0+incompatible
 	github.com/redis/go-redis/v9 v9.5.1
-	github.com/valyala/fasthttp v1.52.0
+	github.com/valyala/fasthttp v1.76.0
 	github.com/zerodha/fastcache/stores/goredis/v9 v9.0.0
 	github.com/zerodha/fastcache/v4 v4.1.0
 	github.com/zerodha/fastglue v1.8.0
@@ -13,13 +13,13 @@ require (
 
 require (
 	github.com/alicebob/gopher-json v0.0.0-20180125190556-5a6b3ba71ee6 // indirect
-	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fasthttp/router v1.4.5 // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
-	github.com/klauspost/compress v1.17.6 // indirect
+	github.com/klauspost/compress v1.20.3 // indirect
+	github.com/molecule-man/go-brrr v1.3.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/savsgio/gotils v0.0.0-20211223103454-d0aaa54c5899 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect

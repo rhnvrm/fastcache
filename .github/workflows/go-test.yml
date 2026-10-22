@@ -1,27 +1,36 @@
 name: Run Tests
 
-# Triggers the workflow on push or pull request events
 on: [push, pull_request]
+
+permissions:
+  contents: read
 
 jobs:
   test:
-    strategy:
-      matrix:
-        go: ["1.18", "1.20"]
-
-    runs-on: ubuntu-20.04
-
-    name: Go ${{ matrix.go }} Tests
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Go
-        uses: actions/setup-go@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
         with:
-          go-version: ${{ matrix.go }}
-
-      - name: Run Test
-        run: go test -v github.com/zerodha/fastcache...
-
-      - name: Run Coverage
-        run: go test -v -cover github.com/zerodha/fastcache...
+          go-version: '1.26.x'
+          cache-dependency-path: |
+            go.sum
+            stores/redis/go.sum
+            stores/goredis/go.sum
+            tests/go.sum
+      - name: Test all workspace modules
+        run: go test -race -cover ./... ./stores/redis/... ./stores/goredis/... ./tests/...
+      - name: Verify each module independently
+        env:
+          GOWORK: 'off'
+        run: |
+          for module in . stores/redis stores/goredis tests; do
+            (cd "$module" && go mod tidy -diff)
+          done
+      - name: Verify library modules independently
+        env:
+          GOWORK: 'off'
+        run: |
+          for module in . stores/redis stores/goredis; do
+            (cd "$module" && go test ./...)
+          done

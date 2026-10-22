@@ -95,3 +95,7 @@ used to start a redis cluster for local testing.
 ```shell
     docker-compose -f redis-cluster-docker-compose.yml up -d
 ```
+
+## Requirements
+
+Go 1.26 or newer.
